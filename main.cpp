@@ -39,15 +39,14 @@ int main() {
     for (auto node_relation : graph_) {
         sort(node_relation.second.begin(), node_relation.second.end());
     }
-
-    // for (auto node_relation : graph_) {
+    for (auto node_relation : graph_) {
     //     std::cout << "City " << node_relation.first << " Connects To: " << std::endl;
     //     std::cout << "{ ";
-    //     for (int neighbor : node_relation.second) {
-    //         std::cout << neighbor << " ";
-    //     }
+        //for (int neighbor : node_relation.second) {
+            //std::cout << neighbor << " ";
+        //}
     //     std::cout << "}" << std::endl;
-    // }
+    }
     // std::cout << "}" << std::endl;
     return 0;   
 }

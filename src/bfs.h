@@ -6,14 +6,14 @@
 #include <algorithm>
 using namespace std;
 
-class BFS {
-    public:
-        BFS();
-        // i think we'll need an overloaded constructor too BFS(vector<bool>)
+// class BFS {
+//     public:
+//         BFS();
+//         // i think we'll need an overloaded constructor too BFS(vector<bool>)
 
-    private:
-        int BFS::travelNode(int from, int arrive);
-        queue<int> q;
-        vector<int> visited;
-        map<int, vector<int>> cities;
-};
+//     private:
+//         int BFS::travelNode(int from, int arrive);
+//         queue<int> q;
+//         vector<int> visited;
+//         map<int, vector<int>> cities;
+// };
