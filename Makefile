@@ -7,8 +7,8 @@ main: main.o
 main.o: main.cpp
 	$(CC) $(CFLAGS) -c main.cpp
 
-test: test.o
-	$(CC) $(CFLAGS) -o test test.o
+test: tests.o
+	$(CC) $(CFLAGS) -o test tests.o
 
-test.o: tests/tests.cpp
-	$(CC) $(CFLAGS) -c tests/tests.cpp
+test.o: tests.cpp
+	$(CC) $(CFLAGS) -c tests.cpp

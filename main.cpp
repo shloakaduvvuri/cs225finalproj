@@ -43,15 +43,20 @@ int main() {
         sort(node_relation.second.begin(), node_relation.second.end());
     }
     cout << "Data Parsing - Adjacency List - Graph Implementation" << endl;
-    // for (auto node_relation : graph_) {
-    // std::cout << "City " << node_relation.first << " Connects To: " << std::endl;
-    // std::cout << "{ ";
-    //     for (int neighbor : node_relation.second) {
-    //         std::cout << neighbor << " ";
-    //     }
-    //      std::cout << "}" << std::endl;
-    // }
-    // std::cout << "}" << std::endl;
+    int print = 0; 
+    for (auto node_relation : graph_) {
+    std::cout << "City " << node_relation.first << " Connects To: " << std::endl;
+    print++;
+    std::cout << "{ ";
+        for (int neighbor : node_relation.second) {
+            std::cout << neighbor << " ";
+        }
+        std::cout << "}" << std::endl;
+        if (print == 100) {
+            break;
+        }
+    }
+    std::cout << "}" << std::endl;
 
     //bfs
     cout << "Breadth First Search Traversal" << endl;
@@ -78,7 +83,7 @@ int main() {
     // }
     std::cout << '\n';
     //djikstras
-    cout << "Djikstra's Shortest Path - Closest 100 Nodes to Source" << endl;
+    cout << "Djikstra's Shortest Path - Distance of 100 Cities from Source" << endl;
     int source = 0;
     int count = 0; 
     vector<pair<int, int>> distances;
