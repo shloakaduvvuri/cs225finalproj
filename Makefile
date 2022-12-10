@@ -1,5 +1,3 @@
-
-
 CC = g++
 CFLAGS = -Wall -g
 
@@ -9,8 +7,8 @@ main: main.o
 main.o: main.cpp
 	$(CC) $(CFLAGS) -c main.cpp
 
-test: tests.o
-	$(CC) $(CFLAGS) -o test tests.o
+test: test.o
+	$(CC) $(CFLAGS) -o test test.o
 
-tests.o: tests/tests.cpp
+test.o: tests/tests.cpp
 	$(CC) $(CFLAGS) -c tests/tests.cpp
