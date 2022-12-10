@@ -4,21 +4,28 @@
 #include <map>
 #include <vector>
 #include <algorithm>
+#include <cassert>
 #include <queue>
+#include <climits>
+#include <set>
+
 using namespace std;
 
 int main() {
+    //data parsing
+    map<int, vector<int>> graph_;
     int index = 0;
+    //int sum = 0;
     int key;
     int x;
     ifstream inFile;
     inFile.open("roadNet-TX.txt");
     if (!inFile) {
         std::cout << "Unable to open file";
-        exit(1);
+        exit(1); // terminate with error
     }
-    map<int, vector<int>> graph_;
     while (inFile >> x) {
+        //std::cout << x << std::endl;
         if (index % 2 == 0) {
             key = x;
             if (graph_.find(key) == graph_.end()) {
@@ -26,8 +33,7 @@ int main() {
                 graph_.insert(make_pair(key, vals));
             }
         } else if (index % 2 == 1) {
-          graph_[key].push_back(x);  
-            
+          graph_[key].push_back(x);   
         }
         index++;
     }
@@ -36,42 +42,72 @@ int main() {
     for (auto node_relation : graph_) {
         sort(node_relation.second.begin(), node_relation.second.end());
     }
+    cout << "Data Parsing - Adjacency List - Graph Implementation" << endl;
+    // for (auto node_relation : graph_) {
+    // std::cout << "City " << node_relation.first << " Connects To: " << std::endl;
+    // std::cout << "{ ";
+    //     for (int neighbor : node_relation.second) {
+    //         std::cout << neighbor << " ";
+    //     }
+    //      std::cout << "}" << std::endl;
+    // }
+    // std::cout << "}" << std::endl;
 
-    //BFS TRAVERSAL
+    //bfs
+    cout << "Breadth First Search Traversal" << endl;
+    int from = 0;
     queue<int> q; 
-    vector<int> visited;
-    int from = 0; 
-    //int arrive = 1; 
+    set<int> visited;
     q.push(from);
-    visited.push_back(from);
-    //int count = 0;
-    //bool finished = false;
+    //visited.push_back(from);
     while (!q.empty()) {
         int curr = q.front();
+        std::cout << curr << " ";
         q.pop();
         vector<int> tovisit = graph_.at(curr);
-        for (unsigned i = 0; i < tovisit.size(); i++) {
-            if (find(visited.begin(), visited.end(), tovisit.at(i)) == visited.end()) {
-                /*if (tovisit.at(i) == arrive) {
-                    count++;
-                    std::cout << "Path Length: " << count << std::endl;
-                    finished = true;
-                    break;
-                }*/
-                q.push(tovisit.at(i));
-                visited.push_back(tovisit.at(i));
-                //count++;
+        for (auto i : tovisit) {
+            if (visited.find(i) == visited.end()) {
+                q.push(i);
+                visited.insert(i);
             }
         }
-        /*if (finished) {
-            break;
-        }*/
     }
-    for (int v : visited) {
-        std::cout << v << " ";
-    }
+    cout << "" << endl;
+    // for (int v : visited) {
+    //     std::cout << v << " ";
+    // }
     std::cout << '\n';
+    //djikstras
+    cout << "Djikstra's Shortest Path - Closest 100 Nodes to Source" << endl;
+    int source = 0;
+    int count = 0; 
+    vector<pair<int, int>> distances;
+    set<int> already_seen;
+    distances.push_back(make_pair(source, count));
+    queue<int> next_node;
+    next_node.push(source);
+    already_seen.insert(source);
+    while (!next_node.empty() && distances.size() <= 100) {
+        int curr = next_node.front();
+        next_node.pop();
+        vector<int> neighbors = graph_.at(curr);
+        count++; 
+        for (auto neighbor : neighbors) {
+            if (already_seen.find(neighbor) == already_seen.end()) {
+                already_seen.insert(neighbor);
+                distances.push_back({neighbor, count});
+                next_node.push(neighbor);
+            }
+        }
+    }
+    sort(distances.begin(), distances.end());
+    for (auto v : distances) {
+        std::cout << v.first << "->" << v.second << ", ";
+    }
 
-    return 0;   
+    std::cout << '\n';
+    
+    //euler-path
+    cout << "Eulerian Path - Add Specificity" << endl;
+
 }
-
