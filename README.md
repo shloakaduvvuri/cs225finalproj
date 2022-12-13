@@ -1,5 +1,18 @@
 # cs225finalproj
 
+# Installation Instructions
+
+Our project exists in a github repository at https://github.com/shloakaduvvuri/cs225finalproj. Our three algorithms and data parsing exist in the main.cpp file. Our tests exist in the tests folder in this same github repository, in the tests.cpp file. Our written report, presentation video, and presentation slides are in the folder titled Documentation contained in this same github repository. Our dataset is also in this github repository, within the txt file titled roadNet-TX.txt. 
+To build and run this project, follow the instructions below: 
+Run git clone https://github.com/shloakaduvvuri/cs225finalproj.git in terminal
+In the terminal, run make && ./main to see the outputs of the data parsing, BFS traversal, Djikstra’s and Euler Path algorithm. 
+If you are interested in changing values, find the lines of code within each algorithm in our main.cpp that hold variables such int source, or int from. If you were to save another node to these values, based on what is in the original dataset, your resulting values would be changed. 
+To build and run the tests for this project, follow the instructions below: 
+Run git clone https://github.com/shloakaduvvuri/cs225finalproj.git in terminal
+In the terminal, run make test && ./test to see the outputs of the tests that we wrote for the data parsing, BFS traversal, Djikstra’s and Euler Path algorithm.
+If the make test command is not functional, scroll to the bottom of the main.cpp file, and uncomment the final block of code. These are manual tests that are exactly the same as what we wrote in tests.cpp, but implemented in main.cpp. 
+
+
 # Project Proposal
 
 ## Leading Question 
