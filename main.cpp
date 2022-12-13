@@ -172,7 +172,100 @@ int main() {
     }
  
   
+// TEST_CASE("graph", "check_structure") {
+    //unsigned actual_num_nodes = 1379917;
+    int actual_num_edges = 1921660;
+    int undirected_edges = actual_num_edges*2;
+    //REQUIRE(graph_.size() == actual_num_nodes);
+    /* the number of edges represents the total number
+    of connections across all the nodes 
+    (total num of elements in all values vectors)
+    */
+   count = 0;
+    for (auto node_neighbors : graph_) {
+        count+=node_neighbors.second.size();
+    }
+    assert (count == undirected_edges);
+//}
+// 153380, 1
+// TEST_CASE("graph2", "check_accuracy") {
+    //pulled from dataset info 
+    vector<int> neighbors_of_1;
+    for (auto c : graph_.at(1)) {
+        neighbors_of_1.push_back(c);
+    }
+    vector<int> correct_1 = {0, 23, 32};
+    assert(neighbors_of_1 == correct_1);
+// }
+//153408, 153376
+// TEST_CASE("graph3", "check_undirected") {
+    //pulled from dataset info 
+    int neighbor_of_153408 = 153376;
+    vector<int> to_search = graph_.at(neighbor_of_153408);
+    assert(find(to_search.begin(), to_search.end(), 153408) != to_search.end());
+// }
 
-    
+// TEST_CASE("djikstra1", "check_source_0") {
+    if(distances[0].second == 0){
+        std::cout << "passes djikstra1 test 1" << std::endl;
+    } else {
+        std::cout << "does not pass djikstra1 test 1" << std::endl;
+    }
+    if(distances[1].second == 1) {
+        std::cout << "passes djikstra1 test 2" << std::endl;
+    } else {
+        std::cout << "does not pass djikstra1 test 2" << std::endl;
+    }
+    if(distances[2].second == 1) {
+        std::cout << "passes djikstra1 test 3" << std::endl;
+    } else {
+        std::cout << "does not pass djikstra1 test 3" << std::endl;
+    }
+// }
 
+// TEST_CASE("djikstra2", "check_middle") {
+    if(distances[6].second == 76) {
+        std::cout << "passes djikstra2 test 1" << std::endl;
+    } else {
+        std::cout << "does not pass djikstra2 test 1" << std::endl;
+    }
+    if(distances[27].second == 13) {
+        std::cout << "passes djikstra2 test 2" << std::endl;
+    } else {
+        std::cout << "does not pass djikstra2 test 2" << std::endl;
+    }
+    if (isEulerian == false) {
+        std::cout << "passes Eulerian test 1" << std::endl;
+    } else {
+        std::cout << "does not pass Eulerian test 1" << std::endl;
+    }
+//}
+
+// TEST_CASE("bfs1", "check_immediate_neighbor_0") {
+    if(visited.find(1) != visited.end()) {
+        std::cout << "passes bfs1 test 1" << std::endl;
+    } else {
+        std::cout << "does not pass bfs1" << std::endl;
+    }
+// }
+
+// TEST_CASE("bfs2", "check_immediate_neighbor_0") {
+    if (visited.find(1) != visited.end()) {
+        std::cout << "passes bfs2 test 1" << std::endl;
+    } else {
+        std::cout << "does not pass bfs2 test 1" << std::endl;
+    }
+// }
+
+// TEST_CASE("bfs3", "check_immediate_neighbor_0") {
+    if(visited.find(34) != visited.end()) {
+        std::cout << "passes bfs3 test 1" << std::endl;
+    } else {
+        std::cout << "does not pass bfs3 test 1" << std::endl;
+    }  
+
+//}
+
+std::cout << "all assertions in all test cases passed" << std::endl;
+return 0;
 }

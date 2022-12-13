@@ -13,6 +13,7 @@
 #include <algorithm>
 #include <set>
 #include <queue>
+#include <stack>
 
 using namespace std;
 
@@ -46,6 +47,73 @@ map<int, vector<int>> makeMap() {
         sort(node_relation.second.begin(), node_relation.second.end());
     } 
     return graph_;
+}
+
+std::string eulerian(map<int, vector<int>> graph_){
+     bool isConnected = true;
+    set<int> haveVisited;
+ 
+    int idx=0;
+    bool done =false;
+   
+    for(auto elem:graph_){
+   
+        if(graph_.at(elem.first).size() > 0&&(!done)){
+            idx=elem.first;
+            done=true;
+        }
+    }
+ 
+   
+    stack<int> s;
+    s.push(idx);
+    while (!s.empty()) {
+        int c = s.top();
+       
+        s.pop();
+        vector<int> toVisit = graph_.at(c);
+        for (auto i : toVisit) {
+            if (haveVisited.find(i) == haveVisited.end()) {
+                s.push(i);
+                haveVisited.insert(i);
+               
+            }
+        }
+    }
+    //end dfs
+    if(haveVisited.size()!=graph_.size()){
+        isConnected=false;
+    }
+ 
+    bool isEulerian=true;
+    //end isconnection
+    //start iseulerian
+    if (isConnected == false){
+        isEulerian=false;
+        return "NOT EULERIAN BECAUSE NOT CONNECTED";
+       
+    }
+    int odd = 0;
+    set<int>::iterator itr;
+    for(itr=haveVisited.begin();itr!=haveVisited.end();itr++){
+            if(graph_.at(*itr).size()%2==1){
+                odd++;
+            }
+ 
+    }
+   
+   
+    if(odd>2){
+        isEulerian=false;
+        return "NOT EULERIAN BECAUSE MORE THAN TWO NODES OF ODD DEGREE";
+       
+    } else if(odd==0){
+        return "EULERIAN CIRCUIT";
+    } else{
+        return "EULERIAN PATH";
+    }
+ 
+ 
 }
 
 set<int> bfs(map<int, vector<int>> graph_, int from) {
@@ -198,7 +266,7 @@ TEST_CASE("eulerian1", "check not eulerian"){
     graph_.insert(make_pair(key3, vals3));
     graph_.insert(make_pair(key4, vals4));
     graph_.insert(make_pair(key5, vals5));
-    std::string result = isEulerian(graph_);
+    std::string result = eulerian(graph_);
     REQUIRE(result == "NOT EULERIAN BECAUSE NOT CONNECTED");
 
 }
@@ -221,7 +289,7 @@ TEST_CASE("eulerian1", "check eulerian path"){
     graph_.insert(make_pair(key4, vals4));
     graph_.insert(make_pair(key5, vals5));
 
-    std::string result = isEulerian(graph_);
+    std::string result = eulerian(graph_);
     REQUIRE(result == "EULERIAN PATH");
 }
 TEST_CASE("eulerian1", "check eulerian circuit"){
@@ -244,7 +312,7 @@ TEST_CASE("eulerian1", "check eulerian circuit"){
     graph_.insert(make_pair(key5, vals5));
 
 
-    std::string result = isEulerian(graph_);
+    std::string result = eulerian(graph_);
     REQUIRE(result == "EULERIAN CIRCUIT");
 
 }
