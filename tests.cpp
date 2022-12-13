@@ -170,7 +170,7 @@ TEST_CASE("bfs1", "check_immediate_neighbor_0") {
     set<int> result = bfs(graph_, 1);
     REQUIRE(result.find(34) != result.end());
     int count = 0;
-    int check = -1; 
+    int check = -1;
     for (auto elem : result) {
         check = elem;
         if (count == 6) {
@@ -178,4 +178,73 @@ TEST_CASE("bfs1", "check_immediate_neighbor_0") {
         }
     }
     REQUIRE(check == 34);
+}
+
+TEST_CASE("eulerian1", "check not eulerian"){
+    map<int, vector<int>> graph_;
+    int key1 = 1;
+    int key2 = 2;
+    int key3 = 3;
+    int key4 = 4;
+    int key5 = 5;
+    vector<int> vals1{2};
+    vector<int> vals2{1};
+    vector<int> vals3{4,5};
+    vector<int> vals4{3,5};
+    vector<int> vals5{3,4};
+
+    graph_.insert(make_pair(key1, vals1));
+    graph_.insert(make_pair(key2, vals2));
+    graph_.insert(make_pair(key3, vals3));
+    graph_.insert(make_pair(key4, vals4));
+    graph_.insert(make_pair(key5, vals5));
+    std::string result = isEulerian(graph_);
+    REQUIRE(result == "NOT EULERIAN BECAUSE NOT CONNECTED");
+
+}
+TEST_CASE("eulerian1", "check eulerian path"){
+     map<int, vector<int>> graph_;
+    int key1 = 1;
+    int key2 = 2;
+    int key3 = 3;
+    int key4 = 4;
+    int key5 = 5;
+    vector<int> vals1{2,3};
+    vector<int> vals2{1,5};
+    vector<int> vals3{4,1};
+    vector<int> vals4{3,5};
+    vector<int> vals5{2,4};
+
+    graph_.insert(make_pair(key1, vals1));
+    graph_.insert(make_pair(key2, vals2));
+    graph_.insert(make_pair(key3, vals3));
+    graph_.insert(make_pair(key4, vals4));
+    graph_.insert(make_pair(key5, vals5));
+
+    std::string result = isEulerian(graph_);
+    REQUIRE(result == "EULERIAN PATH");
+}
+TEST_CASE("eulerian1", "check eulerian circuit"){
+     map<int, vector<int>> graph_;
+    int key1 = 1;
+    int key2 = 2;
+    int key3 = 3;
+    int key4 = 4;
+    int key5 = 5;
+    vector<int> vals1{2,3};
+    vector<int> vals2{1,5};
+    vector<int> vals3{4,1};
+    vector<int> vals4{3,5};
+    vector<int> vals5{2,4};
+
+    graph_.insert(make_pair(key1, vals1));
+    graph_.insert(make_pair(key2, vals2));
+    graph_.insert(make_pair(key3, vals3));
+    graph_.insert(make_pair(key4, vals4));
+    graph_.insert(make_pair(key5, vals5));
+
+
+    std::string result = isEulerian(graph_);
+    REQUIRE(result == "EULERIAN CIRCUIT");
+
 }
